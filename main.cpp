@@ -10,8 +10,16 @@ namespace chrono = std::chrono;
 using std::cout;
 using std::format;
 
-// time_point、sys_days、sys_seconds、year_month_day、hh_mm_ss类型都可以通过标准格式字符串输入输出
-// 格式字符串参考：https://zh.cppreference.com/w/cpp/chrono/parse
+// 时间点(sys_time、utc_time、tai_time、gps_time、file_time、local_time)、
+// 日历(year、month、day、weekday、month_day、year_month、year_month_day)、
+// 时刻(hh_mm_ss)
+// 以上可以通过ostream << T或format(fmt, T)序列化.
+
+// 时间点(sys_time、utc_time、tai_time、gps_time、file_time、local_time)、
+// 日历(year、month、day、weekday、month_day、year_month、year_month_day)
+// 以上可以通过istream >> parse(fmt, T)或from_stream(istream, fmt, T)反序列化.
+
+// 其中fmt参考：https://zh.cppreference.com/w/cpp/chrono/parse
 
 void date_time_to_string()
 {
@@ -65,11 +73,6 @@ void string_to_date_time()
   chrono::year_month_day ymd;
   std::istringstream("2000-01-01 23:59:59.123456") >> chrono::parse("%F", ymd);
   std::cout << ymd << std::endl;
-
-  // chrono::hh_mm_ss<chrono::microseconds> hms;
-  // std::istringstream("2000-01-01 23:59:59.123456") >>
-  //     chrono::parse("%T", tp_us);
-  // std::cout << hms << std::endl;
 }
 
 int main()
